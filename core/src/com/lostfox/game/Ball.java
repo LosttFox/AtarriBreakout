@@ -56,7 +56,7 @@ public class Ball
 	{
 		if(collidesWith(block))
 		{
-			ySpeed = -ySpeed;
+			ySpeed =  -ySpeed;
 			block.destroyed = true;
 		}
 	}
