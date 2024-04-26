@@ -52,6 +52,15 @@ public class Ball
 		}
 	}
 
+	public void checkCollision(Block block)
+	{
+		if(collidesWith(block))
+		{
+			ySpeed = -ySpeed;
+			block.destroyed = true;
+		}
+	}
+
 	private boolean collidesWith(Paddle paddle)
 	{
 		boolean isCollide = false;
@@ -59,6 +68,21 @@ public class Ball
 		if (xPos + size > paddle.xPos && xPos - size < paddle.xPos + paddle.width)
 		{
 			if (yPos + size > paddle.yPos && yPos - size < paddle.yPos + paddle.height)
+			{
+				isCollide = true;
+			}
+		}
+
+		return isCollide;
+	}
+
+	private boolean collidesWith(Block block)
+	{
+		boolean isCollide = false;
+
+		if (xPos + size > block.xPos && xPos - size < block.xPos + block.width)
+		{
+			if (yPos + size > block.yPos && yPos - size < block.yPos + block.height)
 			{
 				isCollide = true;
 			}
