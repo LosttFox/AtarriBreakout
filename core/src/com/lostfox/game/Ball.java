@@ -2,6 +2,8 @@ package com.lostfox.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.Color;
+
 
 public class Ball
 {
@@ -10,6 +12,7 @@ public class Ball
 	int size;
 	int xSpeed;
 	int ySpeed;
+	Color color = Color.WHITE;
 
 	public Ball(int xPos, int yPos, int size, int xSpeed, int ySpeed)
 	{
@@ -37,6 +40,30 @@ public class Ball
 
 	public void draw(ShapeRenderer shape)
 	{
+		shape.setColor(color);
 		shape.circle(xPos, yPos, size);
+	}
+
+	public void checkCollision(Paddle paddle)
+	{
+		if (collidesWith(paddle))
+		{
+			ySpeed = -ySpeed;
+		}
+	}
+
+	private boolean collidesWith(Paddle paddle)
+	{
+		boolean isCollide = false;
+
+		if (xPos + size > paddle.xPos && xPos - size < paddle.xPos + paddle.width)
+		{
+			if (yPos + size > paddle.yPos && yPos - size < paddle.yPos + paddle.height)
+			{
+				isCollide = true;
+			}
+		}
+
+		return isCollide;
 	}
 }
